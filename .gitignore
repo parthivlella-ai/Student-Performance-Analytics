@@ -13,3 +13,6 @@ ENV/
 # IDE files
 .vscode/
 .idea/
+
+# Local helpers
+streamlit.cmd

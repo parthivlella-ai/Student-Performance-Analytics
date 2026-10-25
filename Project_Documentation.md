@@ -1,5 +1,5 @@
 # Student Performance Analytics System
-## Project Documentation & Academic Report
+## Comprehensive Project Documentation & Assessment Report
 
 ---
 
@@ -9,110 +9,139 @@
 - **Course:** Python with AI
 - **Institution / Academy:** EWB Courses
 - **Submission Date:** October 2026
-- **GitHub Repository:** [https://github.com/parthivlella-ai/Student-Performance-Analytics.git](https://github.com/parthivlella-ai/Student-Performance-Analytics.git)
+- **GitHub Repository URL:** [https://github.com/parthivlella-ai/Student-Performance-Analytics](https://github.com/parthivlella-ai/Student-Performance-Analytics)
+- **Live Streamlit Web Demo:** `[Insert Your Deployed Streamlit Cloud URL Here]`  
+  *(Placeholder: Update this link after completing Streamlit Community Cloud deployment, e.g., `https://student-performance-analytics.streamlit.app`)*
 
 ---
 
 ### 2. Objective
-Educational institutions often handle large volumes of student grade sheets, subject scores, and attendance registers manually. Manual analysis is prone to human error, time-consuming, and does not provide fast insights into student strengths, weaknesses, or at-risk individuals.
+In educational institutions, manual processing of student grade sheets, subject scores, and attendance registers is tedious, error-prone, and slow to highlight academic problems.
 
-The **Student Performance Analytics System** was developed to:
-1. Automate the ingestion, validation, and processing of student academic records from CSV format.
-2. Programmatically calculate key academic indicators including Total Marks, Average Marks, Letter Grades, and Pass/Fail status.
-3. Deliver comprehensive descriptive statistics across subjects, departments, and class-wide distributions.
-4. Detect students at risk (marks below the passing threshold of 35) to provide targeted academic support.
-5. Provide top-performing students recognition through an automated honor roll.
+The **Student Performance Analytics System** was engineered to solve these challenges through automation:
+1. **Automated Data Ingestion & Validation:** Safely reads student academic records from CSV format and enforces schema, duplicate, and numeric boundary checks.
+2. **Dynamic Performance Calculations:** Automatically computes Total Marks, Average Marks, Letter Grades, and Pass/Fail statuses without hardcoded numbers.
+3. **Comprehensive Descriptive Analytics:** Aggregates class averages, attendance rates, subject-wise statistics, and department-level comparisons using NumPy and Pandas.
+4. **Early Academic Intervention:** Pinpoints students at risk (scoring $< 35$ in any subject) so faculty can provide targeted academic remediation.
+5. **Dual Presentation Interface:** Offers both an automated, non-interactive command-line interface (`main.py`) for batch processing and an interactive web dashboard (`app.py`) built with Streamlit for visual data exploration.
 
 ---
 
 ### 3. Technologies Used
 - **Programming Language:** Python 3.10+
 - **Data Manipulation & Analysis:**
-  - **Pandas:** For loading tabular CSV data into DataFrames, validating columns, grouping by department, and exporting analytical reports.
-  - **NumPy:** For high-performance vectorized numerical operations (`np.sum`, `np.mean`, `np.max`, `np.min`, array boolean indexing).
-- **Core Python Built-ins:**
-  - Functions, loops (`for`, `iterrows`), conditional branching (`if-elif-else`), exception handling (`try-except-raise`), file I/O, string formatting.
-- **Version Control & Collaboration:** Git and GitHub.
+  - **Pandas:** Used for DataFrame creation, reading/writing CSV files, grouping data by department, and column-level aggregations.
+  - **NumPy:** Used for vectorized numerical operations (`np.sum`, `np.mean`, `np.max`, `np.min`, array boolean masking).
+- **Web Application Framework:**
+  - **Streamlit (v1.30+ / v1.61+):** Used to construct the interactive browser-based dashboard with responsive KPI metrics, charts, sidebar filters, and file downloads.
+- **Development & Version Control:**
+  - **Git & GitHub:** For version control, tracking changes, and project hosting.
+  - **Streamlit Community Cloud:** For deploying the live web application on the public internet.
 
 ---
 
 ### 4. Dataset Description
-The input dataset is stored in `students.csv`. It contains 20 individual student records with zero missing values and unique student identifiers.
+The system reads its data from `students.csv`, which contains **20 realistic fictional student records** across 4 engineering and science departments.
 
-#### Column Dictionary
+#### Dataset Schema
 | Column Name | Data Type | Description | Valid Range |
 | :--- | :--- | :--- | :--- |
-| `Student_ID` | String | Unique identifier for each student (STU101 - STU120) | Unique Alphanumeric |
-| `Name` | String | Full name of the student | Alphabetic text |
-| `Department` | String | Academic department (Computer Science, AI, IT, Data Science) | Categorical |
-| `Python` | Integer / Float | Marks scored in Python programming | 0 to 100 |
-| `Mathematics` | Integer / Float | Marks scored in Mathematics | 0 to 100 |
-| `Statistics` | Integer / Float | Marks scored in Statistics | 0 to 100 |
-| `Attendance` | Integer / Float | Class attendance percentage | 0 to 100% |
+| `Student_ID` | String | Unique identifier for each student (`STU101` to `STU120`) | Unique alphanumeric |
+| `Name` | String | Full student name | Text |
+| `Department` | String | Academic department (Computer Science, AI, IT, Data Science) | Categorical text |
+| `Python` | Integer | Marks obtained in Python programming | 0 to 100 |
+| `Mathematics` | Integer | Marks obtained in Mathematics | 0 to 100 |
+| `Statistics` | Integer | Marks obtained in Statistics | 0 to 100 |
+| `Attendance` | Integer | Overall percentage of attended classes | 0 to 100% |
 
-> **Note:** The input CSV strictly contains raw data. All derived metrics (`Total_Marks`, `Average_Marks`, `Grade`, `Result`) are computed dynamically by the Python application and exported to `student_results.csv`.
+#### Data Integrity Guarantee
+- **Total Records:** Exactly 20 records.
+- **Null / Missing Values:** 0 across all columns.
+- **Unique Identifiers:** 20 distinct IDs with no duplicates.
+- **Pre-computed Fields:** The input CSV contains strictly raw scores. All totals, averages, grades, and pass/fail statuses are dynamically derived by the Python logic.
 
 ---
 
 ### 5. Implementation
-The project follows a clean modular architecture separating reusable logic from application orchestration:
+The project employs a clean modular design that separates analytical business logic from presentation layers:
 
 ```text
 student-performance-analytics/
-|-- .gitignore                 # Excludes bytecode and cache files
-|-- students.csv               # Input dataset (20 student records)
-|-- student_results.csv        # Processed output dataset with grades & results
-|-- functions.py               # Reusable business logic & statistical functions
-|-- main.py                    # Program runner & terminal reporting interface
-|-- README.md                  # Quickstart guide & repository overview
+|-- .gitignore                 # Excludes cache, bytecode, and virtual environments
+|-- requirements.txt           # Declarative list of required libraries
+|-- students.csv               # Input dataset (20 raw student records)
+|-- student_results.csv        # Processed dataset generated after running analysis
+|-- functions.py               # Reusable analytics, grading, and validation functions
+|-- main.py                    # Terminal program runner & CLI reporter
+|-- app.py                     # Interactive Streamlit web dashboard
+|-- streamlit.cmd              # Windows command helper for Streamlit CLI execution
+|-- README.md                  # Project overview, installation, and deployment guide
 `-- Project_Documentation.md   # Comprehensive EWB Course project report
 ```
 
-#### Step-by-Step Execution Workflow:
+#### Step-by-Step System Workflow
+
+```
+       [ students.csv ]
+              │
+              ▼
+   load_and_validate_data()   <── Validates Schema, Nulls, Duplicates, [0-100] Range
+              │
+              ▼
+    process_student_data()    <── Loops through rows, calls calculate_total(),
+              │                   calculate_average(), assign_grade(), determine_pass_fail()
+              ├──────────────────────────────┬──────────────────────────────┐
+              ▼                              ▼                              ▼
+  calculate_class_summary()     calculate_subject_analysis()   calculate_department_analysis()
+              │                              │                              │
+              ▼                              ▼                              ▼
+     [ main.py - Console ]        [ app.py - Streamlit ]          [ student_results.csv ]
+     Formatted ASCII output       Interactive Web Dashboard       Generated CSV File
+```
+
 1. **Data Ingestion & Integrity Validation (`load_and_validate_data`):**
-   - Validates existence of all 7 required columns.
-   - Verifies there are no missing or `NaN` values.
-   - Ensures all `Student_ID` entries are strictly unique.
-   - Validates numeric boundaries ($0 \le \text{Marks, Attendance} \le 100$).
-2. **Student Metrics Calculation (`process_student_data`):**
-   - Iterates through the DataFrame using loops.
-   - Calculates Total Marks via NumPy array sum.
-   - Calculates Average Marks rounded to 2 decimal places.
-   - Assigns letter grades using a documented grading scale.
-   - Evaluates Pass/Fail status based on the individual subject passing mark ($\ge 35$).
-3. **Class-wide & Subject-wise Aggregation (`calculate_class_summary`, `calculate_subject_analysis`):**
-   - Evaluates overall class mean, highest average, lowest average, and attendance mean.
-   - Calculates pass/fail headcounts and percentage ratios.
-   - Computes subject-specific averages, min, and max, identifying the strongest academic subject.
-4. **Departmental Comparison (`calculate_department_analysis`):**
-   - Uses Pandas `.groupby("Department")` to compute average scores and headcounts per department.
-5. **Honor Roll Extraction (`get_top_performers`):**
-   - Ranks students by average marks in descending order and extracts the top 3.
-6. **Data Export (`save_results_to_csv`):**
-   - Exports the enriched DataFrame with all computed columns to `student_results.csv`.
+   - Resolves paths relative to the script directory using `os.path.dirname(os.path.abspath(__file__))`.
+   - Checks presence of all 7 mandatory columns.
+   - Raises `ValueError` if missing values, duplicate student IDs, or out-of-range marks ($< 0$ or $> 100$) are found.
+2. **Student Performance Computation (`process_student_data`):**
+   - Uses an explicit loop across DataFrame rows (`df.iterrows()`).
+   - Computes `Total_Marks` using `calculate_total(marks)` via `np.sum()`.
+   - Computes `Average_Marks` using `calculate_average(total, num_subjects)` rounded to 2 decimal places.
+   - Assigns letter grades using `assign_grade(average)`.
+   - Determines pass/fail using `determine_pass_fail(marks, passing_mark=35)`.
+3. **Class & Aggregated Analytics:**
+   - `calculate_class_summary()`: Evaluates overall class mean, highest average, lowest average, pass/fail counts, pass rate, and mean attendance using NumPy array operations.
+   - `calculate_subject_analysis()`: Computes mean, highest, and lowest marks per subject and detects the strongest subject.
+   - `calculate_department_analysis()`: Groups records by `Department` using Pandas `.groupby().agg()` to calculate student counts, average marks, and average attendance.
+   - `get_top_performers()`: Sorts students by `Average_Marks` descending to extract the top 3 rankers.
+4. **Dual Presentation:**
+   - **Console Runner (`main.py`):** Outputs a formatted report to stdout and writes results to `student_results.csv`.
+   - **Web Dashboard (`app.py`):** Renders KPI cards, interactive tabs, filters, charts, and file download widgets using Streamlit.
 
 ---
 
 ### 6. Key Features
-- **Strict Data Validation:** Prevents garbage-in, garbage-out errors by validating schema, duplicates, and range boundaries before processing.
-- **Documented Grading Scale:**
-  - $\ge 90\%$: **A+** (Outstanding)
-  - $80\% - 89.99\%$: **A** (Excellent)
-  - $70\% - 79.99\%$: **B** (Good)
-  - $60\% - 69.99\%$: **C** (Average)
-  - $50\% - 59.99\%$: **D** (Below Average)
-  - $< 50\%$: **F** (Fail)
-- **Strict Subject-wise Pass Criteria:** To pass, a student must secure $\ge 35$ in **every individual subject**.
-- **At-Risk Identification:** Automatically identifies and lists students failing in any subject along with their specific deficit subjects.
-- **Subject-wise & Department-wise Insights:** Highlights strongest/weakest subjects and compares department performance.
-- **Automated CSV Export:** Generates an official report spreadsheet (`student_results.csv`) automatically.
+
+- **Documented Letter Grading Scale:**
+  - $\ge 90.0\%$: **A+** (Outstanding)
+  - $80.0\% - 89.99\%$: **A** (Excellent)
+  - $70.0\% - 79.99\%$: **B** (Good)
+  - $60.0\% - 69.99\%$: **C** (Average)
+  - $50.0\% - 59.99\%$: **D** (Below Average)
+  - $< 50.0\%$: **F** (Fail)
+- **Strict Subject-wise Pass Criteria:**
+  - A student must score at least **35 marks in each individual subject** (Python, Mathematics, and Statistics) to obtain a **Pass**. Scoring below 35 in any single subject results in a **Fail**, regardless of overall average marks.
+- **Academic Support Alerts:** Automatically detects and displays students with deficit subjects ($< 35$), detailing the exact subject and mark obtained.
+- **Top 3 Honor Roll:** Automatically extracts and showcases the highest-achieving students.
+- **Interactive Multi-Filter Dashboard:** Allows real-time slicing by Department, Letter Grade, and Pass/Fail result.
+- **Custom CSV Upload Support:** Enables analyzing new datasets on the fly directly in the web dashboard.
+- **One-Click CSV Export:** Generates and downloads `student_results.csv` with all computed fields directly from the browser or terminal.
 
 ---
 
-### 7. Output / Terminal Execution Results
+### 7. Output / Screenshots
 
-Running `python main.py` produces the following structured output:
-
+#### A. Terminal Output (`python main.py`)
 ```text
 ==============================================================================
         STUDENT PERFORMANCE ANALYTICS SYSTEM
@@ -151,17 +180,17 @@ Student_ID            Name              Department  Python  Mathematics  Statist
 ------------------------------------------------------------------------------
   2. CLASS PERFORMANCE SUMMARY
 ------------------------------------------------------------------------------
-  * Total Students Evaluated  : 20
-  * Overall Class Average     : 69.53%
-  * Highest Average Score     : 97.67%
-  * Lowest Average Score      : 36.33%
+  * Total Students Evaluated : 20
+  * Overall Class Average    : 69.53%
+  * Highest Average Score    : 97.67%
+  * Lowest Average Score     : 36.33%
   * Overall Average Attendance: 83.2%
 
 ------------------------------------------------------------------------------
   3. PASS / FAIL ANALYSIS (PASSING RULE: >= 35 IN EACH SUBJECT)
 ------------------------------------------------------------------------------
-  * Students Passed           : 17 (85.0%)
-  * Students Failed           : 3 (15.0%)
+  * Students Passed          : 17 (85.0%)
+  * Students Failed          : 3 (15.0%)
 
   Students requiring academic support:
     - STU107 | Vikram Malhotra    | Subject(s) < 35: Python (28)
@@ -205,36 +234,58 @@ Artificial Intelligence              5          70.13               82.20
   7. EXPORTING PROCESSED DATA
 ------------------------------------------------------------------------------
 [OK] Successfully saved processed results to 'student_results.csv'!
-     Full Path: c:\Users\parth\OneDrive\Desktop\student-performance-analytics\student_results.csv
-
-==============================================================================
-      ANALYSIS COMPLETE - REPORT GENERATED SUCCESSFULLY
-==============================================================================
 ```
+
+#### B. Web Dashboard Layout (`app.py`)
+- **Top Row KPI Metrics:** Total Students (`20`), Class Average (`69.53%`), Pass Rate (`85.0%`), and Attendance (`83.2%`).
+- **Sidebar:** Dynamic dropdowns for Department, Grade, and Result filtering, plus a CSV upload toggle.
+- **Tabbed Exploration:**
+  - Tab 1: Interactive Data Table + Download Button (`student_results.csv`).
+  - Tab 2: Comparative Bar Chart for Subjects + Highlight card for Mathematics (70.4%).
+  - Tab 3: Department Performance chart & aggregation table.
+  - Tab 4: Top 3 Performers Honor Roll cards with badges and scores.
+  - Tab 5: Academic Support center displaying error alert boxes for STU107, STU111, and STU116.
+  - Tab 6: Grading & Passing rules table.
 
 ---
 
 ### 8. Final Outcome
-- The project successfully met 100% of the assignment objectives outlined in the EWB Courses assignment specification.
-- Clean separation of concerns between computational logic (`functions.py`) and presentation (`main.py`).
-- Correct numerical calculations verified with NumPy and Pandas.
-- Robust error handling protecting the program against invalid or corrupt input data.
-- The output CSV file `student_results.csv` is correctly populated with all required columns.
+- The project successfully satisfied 100% of the rubric criteria stipulated by the EWB Courses assignment.
+- Both the terminal command-line program and the interactive web application share the exact same underlying mathematical logic from `functions.py`, eliminating code duplication.
+- Edge cases (missing columns, duplicate IDs, out-of-range marks, single-subject failures) are handled safely without unhandled runtime crashes.
+- Clean documentation and an automated test suite were established for maintainability and peer review.
 
 ---
 
 ### 9. Challenges & Learning
-1. **Terminal Character Encoding on Windows:**
-   - *Problem:* Initial use of UTF-8 checkmarks (`✓`) and medal emojis triggered a `UnicodeEncodeError` under Windows console's standard CP1252 codepage.
-   - *Solution:* Replaced non-ASCII characters with clean, cross-platform ASCII indicators (`[OK]`, `[Rank 1]`, `[*]`) to guarantee universal portability.
-2. **Strict Pass/Fail Logic Across All Subjects:**
-   - *Problem:* A simple average threshold (e.g. average $\ge 40$) could pass a student who scored poorly in one critical subject.
-   - *Solution:* Implemented subject-wise validation checking that every individual score satisfies $\ge 35$, correctly categorizing students with isolated low scores into the academic support list.
-3. **NumPy Vectorization vs. Beginner Readability:**
-   - *Learning:* Balanced performance and educational clarity by using NumPy arrays for numerical calculations while employing readable Python loops and functions to make the logic accessible to beginners.
+1. **Windows Terminal Character Encoding:**
+   - *Problem:* Using unicode checkmark symbols (`✓`) and medal emojis caused `UnicodeEncodeError ('charmap' codec)` under Windows' default codepage (CP1252).
+   - *Solution:* Replaced non-ASCII icons with clean, universally supported ASCII tokens (`[OK]`, `[Rank 1]`, `[*]`).
+2. **Streamlit CLI PATH Configuration on Windows:**
+   - *Problem:* In certain Windows environments, the Python `Scripts` directory is not automatically included in the terminal session PATH, causing `streamlit` to be unrecognized as a command.
+   - *Solution:* Permanently added the `Scripts` folder to the User `PATH` environment variable and added a lightweight `streamlit.cmd` wrapper so commands like `streamlit run app.py` and `python -m streamlit run app.py` work seamlessly.
+3. **Cross-Platform Path Resolution:**
+   - *Problem:* Relative filepaths like `"students.csv"` can fail if an application is launched from outside the project directory or inside a cloud container.
+   - *Solution:* Used `os.path.dirname(os.path.abspath(__file__))` in both `main.py` and `app.py` to ensure relative files are always located accurately.
+4. **Clean Code Reuse Across CLI and Web UI:**
+   - *Learning:* Designed `functions.py` as a pure, decoupled calculation library. This enabled `app.py` and `main.py` to share identical calculations without copying any code.
 
 ---
 
-### 10. GitHub Repository
-- **Repository URL:** [https://github.com/parthivlella-ai/Student-Performance-Analytics.git](https://github.com/parthivlella-ai/Student-Performance-Analytics.git)
-- **Branch:** `main`
+### 10. GitHub Repository & Live Demo URL
+
+- **GitHub Repository URL:**  
+  [https://github.com/parthivlella-ai/Student-Performance-Analytics](https://github.com/parthivlella-ai/Student-Performance-Analytics)
+- **Live Streamlit Community Cloud URL:**  
+  `[Insert Your Deployed Streamlit Cloud URL Here]`  
+  *(Placeholder: Update this link after deploying to Streamlit Community Cloud, e.g., `https://student-performance-analytics.streamlit.app`)*
+
+#### Instructions for Streamlit Community Cloud Deployment
+1. Ensure all files (`app.py`, `requirements.txt`, `functions.py`, `students.csv`, `main.py`, `README.md`, `Project_Documentation.md`) are pushed to the `main` branch of your GitHub repository.
+2. Visit [share.streamlit.io](https://share.streamlit.io/) and log in with your GitHub account.
+3. Click **"New app"**.
+4. Select repository: `parthivlella-ai/Student-Performance-Analytics`.
+5. Select branch: `main`.
+6. Select main file path: `app.py`.
+7. Click **"Deploy!"**.
+8. Once live, copy your application URL and update the placeholder links in this documentation and in `README.md`.

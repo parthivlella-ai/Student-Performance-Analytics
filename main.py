@@ -48,9 +48,10 @@ def main():
     print("             EWB Courses - Python with AI")
     print_divider("=")
 
-    # 1. File paths setup
-    input_file = "students.csv"
-    output_file = "student_results.csv"
+    # 1. File paths setup (resolved relative to script directory)
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    input_file = os.path.join(base_dir, "students.csv")
+    output_file = os.path.join(base_dir, "student_results.csv")
 
     # Allow custom input file via command-line argument if provided
     if len(sys.argv) > 1:
