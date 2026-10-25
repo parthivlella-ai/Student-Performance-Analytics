@@ -1,0 +1,21 @@
+Student_ID,Name,Department,Python,Mathematics,Statistics,Attendance,Total_Marks,Average_Marks,Grade,Result
+STU101,Aarav Sharma,Computer Science,88,92,85,92,265.0,88.33,A,Pass
+STU102,Diya Patel,Computer Science,75,80,78,88,233.0,77.67,B,Pass
+STU103,Rohan Verma,Data Science,94,89,96,95,279.0,93.0,A+,Pass
+STU104,Ananya Iyer,Artificial Intelligence,62,58,65,82,185.0,61.67,C,Pass
+STU105,Kabir Singh,Information Technology,45,52,48,74,145.0,48.33,F,Pass
+STU106,Neha Gupta,Computer Science,91,95,90,96,276.0,92.0,A+,Pass
+STU107,Vikram Malhotra,Data Science,28,42,39,70,109.0,36.33,F,Fail
+STU108,Pooja Nair,Artificial Intelligence,82,78,84,90,244.0,81.33,A,Pass
+STU109,Aditya Joshi,Information Technology,56,60,54,78,170.0,56.67,D,Pass
+STU110,Meera Kulkarni,Computer Science,98,96,99,98,293.0,97.67,A+,Pass
+STU111,Siddharth Rao,Data Science,38,32,45,65,115.0,38.33,F,Fail
+STU112,Tanvi Deshmukh,Artificial Intelligence,72,76,70,86,218.0,72.67,B,Pass
+STU113,Karan Mehta,Information Technology,68,70,64,80,202.0,67.33,C,Pass
+STU114,Riya Sen,Computer Science,85,88,82,91,255.0,85.0,A,Pass
+STU115,Harsh Vardhan,Data Science,52,49,55,72,156.0,52.0,D,Pass
+STU116,Ishita Roy,Artificial Intelligence,30,55,50,60,135.0,45.0,F,Fail
+STU117,Varun Chopra,Information Technology,79,84,81,89,244.0,81.33,A,Pass
+STU118,Sneha Pillai,Computer Science,87,83,88,94,258.0,86.0,A,Pass
+STU119,Manish Yadav,Data Science,42,38,40,71,120.0,40.0,F,Pass
+STU120,Priyanka Das,Artificial Intelligence,90,91,89,93,270.0,90.0,A+,Pass
